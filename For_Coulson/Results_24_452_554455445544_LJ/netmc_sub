@@ -1,0 +1,33 @@
+#!/bin/bash
+#$ -S /bin/bash
+#$ -l s_rt=700:00:00
+#SBATCH --output=parallel_%j.log     # Standard output and error log
+
+
+
+
+set fromdir = /slurm_raid_array/netmc_BN/Results_BN/q_100/1000/
+set todir = /slurm_raid_array/netmc_BN/Results_BN/q_100/1000/
+
+mkdir -p $todir
+
+export WORK="/$TMPDIR/$USER/$JOB_ID"
+
+mkdir -p $WORK
+cd $fromdir
+cp -r * $WORK
+cp -r Results $WORK
+cd $WORK
+#python3 establish_restart.py
+#python3 lammps_to_netmc.py
+./simpleNetmc
+python3 establish_restart.py
+python3 lammps_to_netmc.py
+#cp netmc.log $fromdir
+cp -r * $todir
+rm -Rf $WORK
+
+
+
+
+

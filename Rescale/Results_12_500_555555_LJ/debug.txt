@@ -1,0 +1,78 @@
+LAMMPS (23 Jun 2022 - Update 2)
+OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (src/comm.cpp:98)
+  using 1 OpenMP thread(s) per MPI task
+Reading data file ...
+  orthogonal box = (0 0 -0.5) to (27.386128 23.717082 0.5)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  500 atoms
+  scanning bonds ...
+  3 = max bonds/atom
+  scanning angles ...
+  3 = max angles/atom
+  reading bonds ...
+  750 bonds
+  reading angles ...
+  1500 angles
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        0        0       
+  special bond factors coul:  0        0        0       
+     3 = max # of 1-2 neighbors
+     6 = max # of 1-3 neighbors
+    18 = max # of 1-4 neighbors
+    18 = max # of special neighbors
+  special bonds CPU = 0.000 seconds
+  read_data CPU = 0.008 seconds
+Changing box ...
+  orthogonal box = (-0.041482944 0 -0.5) to (27.427611 23.717082 0.5)
+  orthogonal box = (-0.041482944 -0.036197293 -0.5) to (27.427611 23.75328 0.5)
+WARNING: Using 'neigh_modify every 1 delay 0 check yes' setting during minimization (src/min.cpp:187)
+Setting up sd style minimization ...
+  Unit style    : electron
+  Current step  : 0
+WARNING: No pairwise cutoff or binsize set. Atom sorting therefore disabled. (src/atom.cpp:2142)
+WARNING: Inconsistent image flags (src/domain.cpp:819)
+Per MPI rank memory allocation (min/avg/max) = 9.726 | 9.726 | 9.726 Mbytes
+---
+keywords: ['Step', 'PotEng', 'KinEng', 'E_pair', 'E_bond', 'TotEng', 'Volume', 'Temp', ]
+data:
+  - [0, 3.43392795008414, 0, 0, 2.51236875896279, 3.43392795008414, 653.47537716216, 0, ]
+  - [276, 1.29111674247772, 0, 0, 0.449479443800413, 1.29111674247772, 653.47537716216, 0, ]
+...
+Loop time of 0.0548941 on 1 procs for 276 steps with 500 atoms
+
+98.3% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+Minimization stats:
+  Stopping criterion = energy tolerance
+  Energy initial, next-to-last, final = 
+      3.43392795008414    1.2911180015263   1.29111674247772
+  Force two-norm initial, final = 4.7657858 0.0033914824
+  Force max component initial, final = 1.3608154 0.000214927
+  Final line search alpha, max atom move = 1 0.000214927
+  Iterations, force evaluations = 276 550
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Bond    | 0.048793   | 0.048793   | 0.048793   |   0.0 | 88.89
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.0012568  | 0.0012568  | 0.0012568  |   0.0 |  2.29
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.004844   |            |       |  8.82
+
+Nlocal:            500 ave         500 max         500 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:            349 ave         349 max         349 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 0
+Ave neighs/atom = 0
+Ave special neighs/atom = 17.964
+Neighbor list builds = 0
+Dangerous builds = 0
+Total wall time: 0:00:00

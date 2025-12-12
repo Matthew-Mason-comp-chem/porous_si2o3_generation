@@ -1,0 +1,76 @@
+Simulation begun at: Thu Jul 25 18:45:31 2024
+NETwork Monte Carlo
+Written By: David OM, Wilson Group, 2019
+------------------------------------------------------------
+Reading input file
+    I/O read
+    Network properties read
+    Monte Carlo parameters read
+    Energy search parameters read
+    Cost search parameters read
+    Cost function parameters read
+    Potential parameters read
+    Geometry optimisation parameters read
+    Write parameters read
+Input file closed
+------------------------------------------------------------
+Initialising network
+    Lattice type: hexagonal
+    Number of rings: 1588
+    Min ring size: 4
+    Max ring size: 12
+    Min node coordination: 3
+    Max node coordination: 3
+    Monte Carlo run type: energy
+    Monte Carlo move type: switch
+    Monte carlo initial log temperature: -4.00000000
+    Monte carlo final log temperature: -4.00000000
+    Monte carlo log temperature increment: 0.10000000
+    Monte carlo steps per increment: 400
+    Equilibrium steps: 100
+Network initialised
+------------------------------------------------------------
+Initialising analysis output files
+    Ring statistics file created
+    Correlations file created
+    Energy file created
+    Entropy file created
+    Temperature file created
+    Geometry file created
+    Geometry histogram file created
+    Edge distribution file created
+    Coordination statistics file created
+Files initialised
+------------------------------------------------------------
+Running Monte Carlo thermalisation
+    Calculated energies for running systems
+    20/100 moves accepted/completed in 13.184000 seconds
+Monte Carlo equilibration complete
+------------------------------------------------------------
+Running Monte Carlo simulation
+    Temperature: 0.00010000
+        36/100 moves accepted/completed in 13.310000 seconds
+        47/200 moves accepted/completed in 13.626000 seconds
+        55/300 moves accepted/completed in 13.517000 seconds
+        61/400 moves accepted/completed in 18.647000 seconds
+Monte Carlo simulation complete
+------------------------------------------------------------
+Simulation diagnostics
+    Network consistent: 1
+    Rings convex: 0
+    Monte Carlo acceptance: 0.15250000
+    Geometry optimisation codes:
+        Converged:  500
+        Converged (zero force):  0
+        Unconverged:  0
+        Failed (overlapping):  0
+        Failed (initially non-convex):  0
+    Geometry optimisation average iterations: 10.00000000
+Diagnostics complete
+------------------------------------------------------------
+Writing files
+    Writing network files
+Files written
+------------------------------------------------------------
+Simulation complete at: Thu Jul 25 18:46:43 2024
+Duration: 1.20000000 minutes

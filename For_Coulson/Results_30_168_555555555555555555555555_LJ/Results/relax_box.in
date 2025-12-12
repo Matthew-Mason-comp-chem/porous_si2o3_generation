@@ -1,0 +1,45 @@
+# Record box lengths before and after relaxation
+units           electron
+dimension       2
+processors      * * *
+boundary        p p p
+
+atom_style      molecular
+read_data       Si.data
+
+# --- Record initial box dimensions
+variable lx0 equal xhi - xlo
+variable ly0 equal yhi - ylo
+print "INITIAL ${lx0} ${ly0}" file rescale_lengths.dat screen yes
+
+# snapshot initial sizes (immediate evaluation)
+variable lx0_saved equal $(xhi - xlo)
+variable ly0_saved equal $(yhi - ylo)
+
+# --- Potentials and minimization setup
+include         PARM_Si.lammps
+reset_timestep  0
+min_style       cg
+min_modify      dmax 0.1 line quadratic
+
+# --- Relaxation
+fix             boxrel all box/relax x 0.0 y 0.0 vmax 0.01 dilate all
+thermo          10
+thermo_style    custom step pe lx ly press pxx pyy
+minimize        1.0e-8 1.0e-10 1000 20000
+unfix           boxrel
+
+# --- Record final box dimensions (append to same file)
+variable lx1 equal xhi - xlo
+variable ly1 equal yhi - ylo
+print "FINAL ${lx1} ${ly1}" append rescale_lengths.dat screen yes
+
+
+# --- Compute and write rescale ratios (final / initial)
+variable rx equal (xhi - xlo)/v_lx0_saved
+variable ry equal (yhi - ylo)/v_ly0_saved
+print "${rx} ${ry}" file rescale.dat screen no
+
+# --- Optionally write relaxed structure - actual structure will be obtained from rescale.py due to comptatibility 
+write_data Si_relaxed.data
+

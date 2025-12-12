@@ -1,0 +1,130 @@
+LAMMPS (22 Jul 2025 - Update 1)
+OMP_NUM_THREADS environment is not set. Defaulting to 1 thread.
+  using 1 OpenMP thread(s) per MPI task
+units                   electron
+dimension               2
+processors              * * *
+boundary                p p p
+
+#####################################################################
+
+variable time equal 25*0.02418884326
+
+#####################################################################
+
+#read data
+atom_style              molecular
+read_data               Si.data
+Reading data file ...
+  orthogonal box = (0 0 -0.5) to (43.988635 38.095275 0.5)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  1290 atoms
+  scanning bonds ...
+  3 = max bonds/atom
+  scanning angles ...
+  3 = max angles/atom
+  orthogonal box = (0 0 -0.5) to (43.988635 38.095275 0.5)
+  1 by 1 by 1 MPI processor grid
+  reading bonds ...
+  1935 bonds
+  reading angles ...
+  3870 angles
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        0        0       
+  special bond factors coul:  0        0        0       
+     3 = max # of 1-2 neighbors
+     6 = max # of 1-3 neighbors
+    18 = max # of 1-4 neighbors
+    18 = max # of special neighbors
+  special bonds CPU = 0.001 seconds
+  read_data CPU = 0.022 seconds
+timestep ${time}
+timestep 0.6047210815
+
+#####################################################################
+
+#potential
+include                 PARM_Si.lammps
+bond_style harmonic
+bond_coeff 1 0.800 1.000
+angle_style cosine/squared
+angle_coeff 1 0.200 120
+
+#####################################################################
+variable xscale equal 1.0
+variable yscale equal 1.0
+change_box all x scale 1.0081883477174693 y scale 1.0161108799473078 remap
+Changing box ...
+  orthogonal box = (-0.18009712 0 -0.5) to (44.168732 38.095275 0.5)
+  orthogonal box = (-0.18009712 -0.3068742 -0.5) to (44.168732 38.40215 0.5)
+#####################################################################
+
+#outputs
+thermo                  0
+thermo_style            custom step pe ke epair ebond etotal vol temp
+
+#####################################################################
+
+dump                    1 all custom 1000000000 Si_dump.lammpstrj id element type x y z
+dump_modify             1 element Si
+thermo_modify           line yaml
+
+#####################################################################
+
+#initial minimisation
+
+min_style               sd
+minimize        1.0e-6 0.0 1000000 10000000
+WARNING: No pairwise cutoff or binsize set. Atom sorting therefore disabled. (src/atom.cpp:2499)
+WARNING: Inconsistent image flags
+For more information see https://docs.lammps.org/err0027 (src/domain.cpp:1052)
+Per MPI rank memory allocation (min/avg/max) = 8.518 | 8.518 | 8.518 Mbytes
+---
+keywords: ['Step', 'PotEng', 'KinEng', 'E_pair', 'E_bond', 'TotEng', 'Volume', 'Temp', ]
+data:
+  - [0, 10.5241122522299, 0, 0, 7.38454024951126, 10.5241122522299, 1716.69987833588, 0, ]
+  - [645, 5.87557287579036, 0, 0, 2.7289951815088, 5.87557287579036, 1716.69987833588, 0, ]
+...
+Loop time of 0.296059 on 1 procs for 645 steps with 1290 atoms
+
+99.8% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+Minimization stats:
+  Stopping criterion = energy tolerance
+  Energy initial, next-to-last, final = 
+      10.5241122522299   5.87557873379198   5.87557287579036
+  Force two-norm initial, final = 6.1029997 0.0054309086
+  Force max component initial, final = 1.8846954 0.00034583802
+  Final line search alpha, max atom move = 1 0.00034583802
+  Iterations, force evaluations = 645 1286
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Bond    | 0.26947    | 0.26947    | 0.26947    |   0.0 | 91.02
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.0030684  | 0.0030684  | 0.0030684  |   0.0 |  1.04
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.02352    |            |       |  7.94
+
+Nlocal:           1290 ave        1290 max        1290 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:            539 ave         539 max         539 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 0
+Ave neighs/atom = 0
+Ave special neighs/atom = 17.939535
+Neighbor list builds = 0
+Dangerous builds = 0
+
+#####################################################################
+
+#write_data              Si_results.dat
+#write_restart  C_results.rest
+Total wall time: 0:00:00

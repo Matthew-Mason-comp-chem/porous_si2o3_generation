@@ -1,0 +1,12 @@
+### Files ###
+*.png
+*.lammpstrj
+test_ematrix.out
+log.lammps
+
+
+### dir ###
+Run_Coulson/Results_TR
+Run_Coulson/Submission_TR
+/Run_Coulson/energetics/data
+Run_Coulson/Results_*_*

@@ -11,12 +11,17 @@ set global paths within:
 To match system
 
 ## Procedure 
-
+Generating structures:
 1. Run Create_Image.py within Pore_Evaporation and right click nodes to create desired Pore
 2. Edit "folder_name" to adjust system size as desired
 3. Run ./preprocess <Output from Create_Image.py>
 4. Edit netmc_Pores.aux file (Natoms, Pore Size, seed, and temperature range, number of steps, runtype)
 5. Run ./netmc_Pores.sh
+
+Post Processing:
+1. Run TR_shells.py within Run_Coulson/Results_TR/Pore_{Pore_size}_{system_size} --> topological and geometric analysis
+2. Run
+3. 
 
 ## Guide for parameters
 

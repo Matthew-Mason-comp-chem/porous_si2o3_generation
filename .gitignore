@@ -9,4 +9,7 @@ log.lammps
 Run_Coulson/Results_TR
 Run_Coulson/Submission_TR
 /Run_Coulson/energetics/data
+<<<<<<< HEAD
 Run_Coulson/Results_*_*
+=======
+>>>>>>> 041a5988f3a3ffc885ae81c6fb0d0a564eb4be88

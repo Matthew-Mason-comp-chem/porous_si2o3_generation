@@ -1,0 +1,53 @@
+I/O
+./crys.crds              input coordinates
+./harmpairs.dat              input harmonic pairs
+./lj_pairs.dat              input repulsive pairs
+./fixedz.dat              input fixed z atoms
+./test                              output prefix
+-----------------------------------------------------------
+Restart Options
+0               print restart file
+0               restart run?
+-----------------------------------------------------------
+Sample Information
+1600
+1               stretch x
+1               stretch y
+0               stretch z
+45              central angle
+0              scan angle
+105.099
+91.0188
+20              unit cell z
+-----------------------------------------------------------
+Geometry Optimisation
+1                   resize(1/0)
+1.300               starting volume (relative to reference)
+0.900               final volume (relative to reference)
+5                   number of volumes to analyse
+1                  samples per volume
+105.099
+91.0188
+20                  unit cell z reference
+10000000             max steps iterations steepest descent (per area)
+0.5                 Armijo backtracking constant
+1e-9                convergence tolerance
+-----------------------------------------------------------
+Potential Model
+1                   turn on harmonic interactions (1/0)
+1.609               harmonic Si-O r0
+1                   harmonic Si-O k
+1                   harmonic O-O k
+0                   turn on SiSi harmonics (1/0)
+0                   harmonic Si-Si r0
+0                   harmonic Si-Si k
+1                   turn on 24-12 repulsions (1/0)
+1.7                 repulsive r0
+0.25                repulsive k
+0                   turn on z fixing (1/0)
+1                   turn on multicore optimisation
+0                   Parallelise Sample
+1                   Parallelise Area
+1                   number of cores
+0                   turn on cuda
+-----------------------------------------------------------

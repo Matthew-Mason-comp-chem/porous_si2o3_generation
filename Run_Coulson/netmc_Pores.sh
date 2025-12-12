@@ -1,15 +1,15 @@
 #!/bin/bash
 
 # Directories
-export NETMC=/u/mw/shug7609/netmc_Pores_Paper/Run_Coulson/
-export RUNHOME=/u/mw/shug7609/netmc_Pores_Paper/Run_Coulson
+export NETMC=/u/mw/shug7609/porous_si2o3_generation/Run_Coulson/
+export RUNHOME=/u/mw/shug7609/porous_si2o3_generation/Run_Coulson
 # Files
 export X=simpleNetmc
 export INPT=netmc.inpt
 export SUB=netmc_sub
-export AUX=/u/mw/shug7609/netmc_Pores_Paper/Run_Coulson/netmc_Pores.aux
+export AUX=/u/mw/shug7609/porous_si2o3_generation/Run_Coulson/netmc_Pores.aux
 export FIXED=fixed_rings.dat
-#export RESULTS=/u/mw/jesu2929/netmc_Pores_Paper/Run_Coulson/run_ores/Results
+#export RESULTS=/u/mw/jesu2929/porous_si2o3_generation/Run_Coulson/run_ores/Results
 # Variables
 SOURCE=$( head -2 $AUX | tail -1 | awk '{print$1}')
 DESTINATION=$(head -3 $AUX | tail -1 | awk '{print$1}')

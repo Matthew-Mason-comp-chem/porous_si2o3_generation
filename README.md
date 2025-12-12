@@ -1,5 +1,5 @@
 # 2D SiO2 Bilayers
-##Overview
+## Overview
 This is a Markov Chain Monte Carlo code to generate amorphous 2D networks of physical systems.
 
 ## Setup

@@ -9,11 +9,11 @@ IFS=$'\n\t'
 dry_run="${DRY_RUN:-false}"
 
 # Defining directories 
-export pore_evap=/u/mw/shug7609/netmc_Pores_Paper/Pore_Evaporation/
-export rescale=/u/mw/shug7609/netmc_Pores_Paper/Rescale/
+export pore_evap=/u/mw/shug7609/porous_si2o3_generation/Pore_Evaporation/
+export rescale=/u/mw/shug7609/porous_si2o3_generation/Rescale/
 export dir_of_int="${1:-}"
-export for_col=/u/mw/shug7609/netmc_Pores_Paper/For_Coulson/
-export run_col=/u/mw/shug7609/netmc_Pores_Paper/Run_Coulson/
+export for_col=/u/mw/shug7609/porous_si2o3_generation/For_Coulson/
+export run_col=/u/mw/shug7609/porous_si2o3_generation/Run_Coulson/
 
 
 if [[ -z "${dir_of_int:-}" ]]; then
@@ -49,8 +49,8 @@ do_cmd "cp -r \"$dir_of_int\" \"$rescale\" "
 Work="$rescale/$(basename "$dir_of_int")"
 
 log "Copying .py files from $rescale to $Work"
-do_cmd "cp \"/u/mw/shug7609/netmc_Pores_Paper/Rescale/relax_box.in\" \"$Work\""
-do_cmd "cp \"/u/mw/shug7609/netmc_Pores_Paper/Rescale/rescale.py\" \"$Work\""
+do_cmd "cp \"/u/mw/shug7609/porous_si2o3_generation/Rescale/relax_box.in\" \"$Work\""
+do_cmd "cp \"/u/mw/shug7609/porous_si2o3_generation/Rescale/rescale.py\" \"$Work\""
 
 # running scaling scripts 
 
@@ -91,8 +91,8 @@ do_cmd "cd \"$Work\" && for f in *; do [ \"\$f\" = \"Results\" ] && continue; [ 
 
 echo "start"
 log "copying input files"
-do_cmd "cp /u/mw/shug7609/netmc_Pores_Paper/For_Coulson/Input/* \"$Work\""
-do_cmd "cp /u/mw/shug7609/netmc_Pores_Paper/For_Coulson/Results_input/* \"$sub_results\""
+do_cmd "cp /u/mw/shug7609/porous_si2o3_generation/For_Coulson/Input/* \"$Work\""
+do_cmd "cp /u/mw/shug7609/porous_si2o3_generation/For_Coulson/Results_input/* \"$sub_results\""
 echo "end"
 
 

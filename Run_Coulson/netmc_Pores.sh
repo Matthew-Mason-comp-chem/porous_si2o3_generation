@@ -86,6 +86,24 @@ do
     echo $T
 done
 
+# Adding system to processme.txt
+
+
+
+if [ -f "processme.txt" ]; then
+    echo "processme exits"
+    echo "Attempting to edit"
+    printf "%s,%s,%s\n" "$CentralRing" "$NATOMS" "$STEP" >> processme.txt
+else
+    echo "Creating processme.txt"
+    touch processme.txt
+    echo "attempting to write to file"
+    printf "%s,%s,%s\n" "$CentralRing" "$NATOMS" "$STEP" > processme.txt
+
+fi
+
+
+
 for T in `seq $ABST0 -$TINC $ABST1`
 do
         echo $T

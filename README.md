@@ -19,9 +19,7 @@ Generating structures:
 5. Run ./netmc_Pores.sh
 
 Post Processing:
-1. Run TR_shells.py within Run_Coulson/Results_TR/Pore_{Pore_size}_{system_size} --> topological and geometric analysis
-2. Run
-3. 
+1. Run ./postprocess.sh
 
 ## Guide for parameters
 

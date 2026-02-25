@@ -8,10 +8,21 @@ q_ana="Q_eval_TR.py"
 theta_ana="TR_shells_theta.py"
 
 # read processme.txt then loop through systems 
+# re naming to prevent other scripts adding to processme being an issue - name can be based on time of day hence multiple postprocessme
+# can be run at the same time
+# step 1 generate new file name
+filename="output_$(date +%Y%m%d_%H%M%S).txt"
+echo $filename
+
+processfile="$filename"
+
+mv "processme.txt" "$processfile"
+
+
 
 while IFS=", " read -r CentralRing NAtoms STEPS; do
 	echo "Prcoessing Pore_$CentralRing _ $NAtoms $STEPS"
-	
+		
 	dir="Results_TR/Pore_${CentralRing}_$NAtoms"
 	
 	# Running electrostatic analysis (fast hence first)
@@ -95,19 +106,29 @@ while IFS=", " read -r CentralRing NAtoms STEPS; do
 	echo "[$(date)] Completed compression in $di" | tee -a "$LOGFILE"
 
 
-	# Running topological analysis
-	echo "-------------------------------------------------------------------------------------------------------"
-	echo "-------------------------------------------------------------------------------------------------------"
-	
-	cd "$dir" || continue
-	cp ../TR_shells.py .
 
-	$python_exec TR_shells.py --steps $STEPS
-
-	cd ../..
+done < $processfile
 
 
-	# Removing entry from processme.txt
-	sed -i "\|^$CentralRing, *$NAtoms, *$STEPS$|d" processme.txt	
 
-done < processme.txt
+while IFS=", " read -r CentralRing NAtoms STEPS; do
+	echo "excuting tr_shells.py"
+	 # Running topological analysis
+        echo "-------------------------------------------------------------------------------------------------------"
+        echo "-------------------------------------------------------------------------------------------------------"
+
+        cd "$dir" || continue
+        cp ../TR_shells.py .
+
+        $python_exec TR_shells.py --steps $STEPS
+
+        cd ../..
+
+
+        # Removing entry from processme.txt
+        sed -i "\|^$CentralRing, *$NAtoms, *$STEPS$|d" $processfile
+
+
+done < $processfile
+
+rm $processfile

@@ -86,8 +86,53 @@ for idx, T in enumerate(temps):
                         if not os.path.exists(path+'test_B_dual.dat'):
                             continue
                         
-                        with open(path+'test_B_dual.dat', 'r') as f:
-                           B_net = np.genfromtxt(f, max_rows=1, dtype=int)
+                        if pore > 12:
+                            with open(path+'test_B_dual.dat', 'r') as f:
+                                for line in f:
+                                    values = list(map(int, line.split()))
+                                    if len(values) == pore:
+                                        B_net = np.array(values, dtype=int)
+                                        break
+
+                        else:
+                            # Find all matching rows
+                            candidate_rows = []
+                            with open(path+'test_B_dual.dat', 'r') as f:
+                                for line in f:
+                                    values = list(map(int, line.split()))
+                                    if len(values) == pore:
+                                        candidate_rows.append(np.array(values, dtype=int))
+
+                            if len(candidate_rows) == 1:
+                                B_net = candidate_rows[0]
+                            else:
+                                # Load coordinates to find centre
+                                with open(path+'test_Si2O3_crds.dat', 'r') as f:
+                                    A_crds = np.genfromtxt(f, dtype=float)
+
+                                # Find centre from A_crds x/y bounds
+                                x_mid = (A_crds[:, 0].max() + A_crds[:, 0].min()) / 2
+                                y_mid = (A_crds[:, 1].max() + A_crds[:, 1].min()) / 2
+                                centre = np.array([x_mid, y_mid])
+
+                                # For each candidate row, compute COM of its ring and find distance to centre
+                                best_row = None
+                                best_dist = np.inf
+                                for row in candidate_rows:
+                                    ring_crds = np.array([A_crds[si, :2] for si in row])
+                                    com = ring_crds.mean(axis=0)
+                                    dist = np.linalg.norm(com - centre)
+                                    if dist < best_dist:
+                                        best_dist = dist
+                                        best_row = row
+
+                                B_net = best_row
+
+
+
+                        #with open(path+'test_B_dual.dat', 'r') as f:
+                        #    B_net = np.genfromtxt(f, max_rows=1, dtype=int)
+                        
                         with open(path+'test_Si2O3_net.dat', 'r') as f:
                            A_net = np.genfromtxt(f, max_rows=num, dtype=int)
                         with open(path+'test_Si2O3_crds.dat', 'r') as f:

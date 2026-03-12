@@ -21,9 +21,24 @@ mv "processme.txt" "$processfile"
 
 
 while IFS=", " read -r CentralRing NAtoms STEPS; do
+
+	
 	echo "Prcoessing Pore_$CentralRing _ $NAtoms $STEPS"
 		
 	dir="Results_TR/Pore_${CentralRing}_$NAtoms"
+	
+	
+	# delting dump files
+        echo "--------------------------------------------------"
+        cd "$dir" || continue
+
+        rm T_-*/S_*/*/Si_dump.lammpstrj
+        rm T_-*/S_*/*/Si2O3_dump.lammpstrj
+
+        cd ../..
+
+        echo "all dump files deleted"
+		
 	
 	# Running electrostatic analysis (fast hence first)
 	echo "--------------------------------------------------"
@@ -52,16 +67,6 @@ while IFS=", " read -r CentralRing NAtoms STEPS; do
 
 	echo "Geometric analysis complete"
 
-	# delting dump files
-	echo "--------------------------------------------------"
-	cd "$dir" || continue
-	
-	rm T_-*/S_*/*/Si_dump.lammpstrj
-	rm T_-*/S_*/*/Si2O3_dump.lammpstrj
-	
-	cd ../..
-
-	echo "all dump files deleted"
 	
 	# compressing into zip (based on zip_ematrix_log.sh)
        	echo "--------------------------------------------------"

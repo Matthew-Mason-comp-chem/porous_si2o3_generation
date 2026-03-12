@@ -23,7 +23,7 @@ node_radius = 2.63/(2*0.529177)
 #### Def systems ###
 sys_s_min = 1000
 sys_s_max = 1400
-pore_sizes = range(8, 36, 1)
+pore_sizes = range(5, 36, 1)
 steps = 10000 
 
 temps=[5000, 1300]
